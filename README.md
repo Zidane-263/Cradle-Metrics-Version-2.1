@@ -1,13 +1,13 @@
 # 🏥 CradleMetrics v2.1: The Workspace Optimization Update
-### Clinical Biometrics • Multi-Standard Diagnostic flexibility • Professional Workstation
+### Clinical Biometrics • Multi-Standard Diagnostics • Professional Workstation
 
-CradleMetrics v2.1 transforms the fetal biometric extraction pipeline into a high-throughput clinical workstation. Building upon the AI foundation of v2.0, this version introduces real-time growth standard switching, population health metrics, and deep-level backend hardening for professional medical environments.
+CradleMetrics v2.1 is an automated fetal health analytics platform that transforms raw obstetric ultrasound images into a comprehensive clinical assessment. By leveraging state-of-the-art AI (YOLOv8 & SAM), it automates biometric extraction, clinical risk assessment, and longitudinal growth tracking to improve speed, consistency, and diagnostic accuracy in obstetrics.
 
 ---
 
 ## 🛰️ System Architecture (v2.1)
 
-CradleMetrics operates as a multi-stage pipeline, now enhanced with a real-time clinical assessment engine that supports on-the-fly standard re-evaluation.
+CradleMetrics operates as a high-fidelity pipeline, ensuring every pixel is analyzed with clinical context.
 
 ```mermaid
 graph TD
@@ -24,47 +24,84 @@ graph TD
 
 ---
 
-## ✨ What's New in Version 2.1
+## 🩺 Clinical Methodology & Rationale
 
-### 🏥 1. Workstation Workflow Refactoring
-The primary assessment interface is now optimized for high-cadence clinical use.
-- **Dynamic Controls**: New **"New Analysis"** (reset) and **"Analyse Again"** (re-valuation) buttons for rapid processing.
-- **Header-Centric Reporting**: Consolidated PDF actions in the results header for a distraction-free assessment.
+CradleMetrics automates the **Gold Standard** fetal biometry set, providing a holistic view of development:
 
-### ⚙️ 2. Real-Time Growth Standard Switching
-Introduced the "Diagnostic Toggle" for immediate comparative biometry.
-- **Post-Analysis Toggling**: Switch between **INTERGROWTH-21st**, **WHO**, and **Hadlock** standards after the analysis is complete.
-- **Live Percentile Updates**: Switching standards instantly re-calculates all percentiles and risk classifications without re-segmenting the image.
+- **HC (Head Circumference)**: Reflects brain and skull development.
+- **BPD (Biparietal Diameter)**: The most reproducible measurement for gestational age.
+- **AC (Abdominal Circumference)**: The most sensitive indicator of fetal nutrition and adiposity (liver size).
+- **FL (Femur Length)**: Reflects skeletal maturation and longitudinal growth.
 
-### 📊 3. Population Health Analytics
-The Patient Directory is now a dashboard for population-level insights.
-- **Live KPIs**: Real-time tracking of **Total Database Size**, **Risk Prevalence (%)**, and **Average Gestational Age**.
-- **Telemetry Persistence**: Guaranteed archival of Consensus GA and Risk Status for every scan.
-
-### 🧬 4. Advanced Clinical Biometrics
-The clinical engine now provides a comprehensive obstetric profile beyond simple measurements.
-- **EFW (Estimated Fetal Weight)**: Integrated **Hadlock 4-Parameter** regression for precise weight estimation (grams).
-- **EDD (Estimated Date of Delivery)**: Automated calculation of the biological birth date based on composite ultrasound GA.
-- **Cephalic Index (CI)**: Automated morphological assessment for dolichocephaly and brachycephaly.
-
-### 🛡️ 5. AI Backend Hardening (Stability+)
-- **Bounding Box Validation**: Strict guardrails in `SAMSegmentor` to prevent zero-sized box errors.
-- **Crash Prevention**: Specifically addressed `repeat_interleave` tensor errors by filtering malformed data.
-- **Boundary Guardrails**: Coordinate clipping ensures all landmarks stay within image bounds.
-
-### 📈 6. High-Fidelity Charting & Reporting
-- **Longitudinal Growth Trends**: Interactive workstation charts showing fetal growth patterns over time against global benchmarks.
-- **Off-Screen Rendering**: The PDF engine now captures the full growth chart even if the examiner has not explicitly opened the charts tab.
-- **Professional Labeling**: Biometric outputs are now formatted with standardized medical nomenclature.
+### Why Automated Biometry?
+- ⏱️ **Speed**: Reduces analysis time from minutes to seconds.
+- 🔁 **Consistency**: Eliminates inter-operator measurement variability.
+- 🌍 **Access**: Enables specialized assessment in settings without senior sonographers.
 
 ---
 
-## 📂 System Components
+## ✨ What's New in Version 2.1
 
-- **Detection**: Custom YOLOv8 models for anatomical plane identification.
-- **Segmentation**: Segment Anything Model (SAM) for precision masking.
-- **Standards**: Built-in support for INTERGROWTH-21st, WHO, and Hadlock.
-- **Reporting**: Professional reportlab-based PDF generator with growth curve visualization.
+### ⚙️ 1. Real-Time Growth Standard Switching
+Introduced the "Diagnostic Toggle" for immediate comparative biometry.
+- **Post-Analysis Toggling**: Switch between **INTERGROWTH-21st**, **WHO**, and **Hadlock** standards instantly.
+- **Live Percentile Updates**: Re-calculates all risk classifications without requiring a re-upload.
+
+### 🧬 2. Advanced Clinical Biometrics
+The engine now provides a comprehensive obstetric profile:
+- **EFW (Estimated Fetal Weight)**: Automatic calculation using the **Hadlock 4-Parameter** regression model.
+- **EDD (Estimated Date of Delivery)**: Automated birth date calculation based on composite ultrasound GA.
+- **Cephalic Index (CI)**: Automated morphological assessment (Dolichocephaly vs. Brachycephaly).
+- **Clinical Ratios**: Automatic evaluation of **HC/AC** and **FL/AC** ratios for IUGR screening.
+
+### 📊 3. Population Health Analytics
+The Patient Directory serves as a dashboard for population-level insights:
+- **Live KPIs**: Real-time tracking of **Total Database Size**, **Risk Prevalence (%)**, and **Average GA**.
+- **Telemetry Persistence**: Guaranteed archival of Consensus GA and Risk Status for every scan.
+
+---
+
+## 📈 Growth Pattern Recognition
+
+CradleMetrics automatically classifies growth into clinical categories:
+
+| Status | Meaning | Clinical Context |
+|---|---|---|
+| **✅ AGA** | Appropriate for Gestational Age | Normal growth (10th–90th percentile) |
+| **📉 IUGR** | Intrauterine Growth Restriction | AC < 10th percentile; monitored via HC/AC ratio |
+| **📈 Macrosomia** | Large for Gestational Age | AC > 90th percentile; check for gestational diabetes |
+| **🧠 Microcephaly**| Small Head Development | HC < 5th percentile; urgent review |
+
+### 🛡️ Risk Triage System
+| Level | Color | Action |
+|---|---|---|
+| 🟢 **Normal** | Green | Routine prenatal care |
+| 🟡 **Borderline** | Amber | Close monitoring (2-4 weeks) |
+| 🔴 **High Risk** | Red | Clinical review recommended (1-2 weeks) |
+| ⛔ **Critical** | Dark Red | Urgent evaluation required (24-48 hours) |
+
+---
+
+## 📊 High-Fidelity Charting & Forecasting
+
+- **Longitudinal Growth Trends**: Interactive workstation charts showing growth patterns against global benchmarks.
+- **Predictive Forecasting**:
+    - **Multi-Scan**: Uses linear regression through historical data points.
+    - **Single-Scan**: Uses **Z-Score Projection** to estimate the future growth trajectory.
+- **Off-Screen Rendering**: PDF engine captures the full growth chart regardless of the current UI tab.
+
+---
+
+## 🛠️ Technology Stack
+
+| Component | Technology |
+|---|---|
+| **AI Detection** | YOLOv8 (Ultralytics) — Custom trained |
+| **AI Segmentation** | Meta SAM (Segment Anything Model) ViT-B |
+| **Backend** | Python 3.10 + Flask |
+| **Clinical Engine** | Custom `clinical_rules.py` (Hadlock/WHO/INTERGROWTH) |
+| **Visualization** | Chart.js with Interactive Workstation Overlays |
+| **Reporting** | Professional PDF generation via ReportLab |
 
 ---
 
