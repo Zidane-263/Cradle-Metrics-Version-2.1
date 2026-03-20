@@ -41,14 +41,21 @@ The Patient Directory is now a dashboard for population-level insights.
 - **Live KPIs**: Real-time tracking of **Total Database Size**, **Risk Prevalence (%)**, and **Average Gestational Age**.
 - **Telemetry Persistence**: Guaranteed archival of Consensus GA and Risk Status for every scan.
 
-### 🛡️ 4. AI Backend Hardening (Stability+)
+### 🧬 4. Advanced Clinical Biometrics
+The clinical engine now provides a comprehensive obstetric profile beyond simple measurements.
+- **EFW (Estimated Fetal Weight)**: Integrated **Hadlock 4-Parameter** regression for precise weight estimation (grams).
+- **EDD (Estimated Date of Delivery)**: Automated calculation of the biological birth date based on composite ultrasound GA.
+- **Cephalic Index (CI)**: Automated morphological assessment for dolichocephaly and brachycephaly.
+
+### 🛡️ 5. AI Backend Hardening (Stability+)
 - **Bounding Box Validation**: Strict guardrails in `SAMSegmentor` to prevent zero-sized box errors.
 - **Crash Prevention**: Specifically addressed `repeat_interleave` tensor errors by filtering malformed data.
 - **Boundary Guardrails**: Coordinate clipping ensures all landmarks stay within image bounds.
 
-### 📈 5. High-Fidelity Chart Capture
-- **Off-Screen Rendering**: The PDF engine now captures **Longitudinal Growth Trends** even if the user hasn't toggled to the charts tab.
-- **Professional Labeling**: Biometric outputs are now formatted with standardized medical nomenclature (e.g., "Head Circumference" vs `hc`).
+### 📈 6. High-Fidelity Charting & Reporting
+- **Longitudinal Growth Trends**: Interactive workstation charts showing fetal growth patterns over time against global benchmarks.
+- **Off-Screen Rendering**: The PDF engine now captures the full growth chart even if the examiner has not explicitly opened the charts tab.
+- **Professional Labeling**: Biometric outputs are now formatted with standardized medical nomenclature.
 
 ---
 
