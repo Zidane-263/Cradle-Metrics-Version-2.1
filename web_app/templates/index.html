@@ -1,0 +1,473 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CradleMetrics | Analysis Dashboard</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Outfit:wght@300;400;500;600;700;800;900&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <!-- Chart.js for Growth Analytics -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-annotation@3.0.1/dist/chartjs-plugin-annotation.min.js"></script>
+    <style>
+        .image-box { position: relative; transition: all 0.3s ease; }
+        .image-box:hover { border-color: var(--primary) !important; transform: translateY(-2px); box-shadow: 0 8px 25px rgba(6, 182, 212, 0.2); }
+        .image-box .view-hover-btn {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%) scale(0.9);
+            background: rgba(6, 182, 212, 0.2);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            color: #fff;
+            padding: 10px 20px;
+            border-radius: 30px;
+            font-weight: 700;
+            font-size: 0.85rem;
+            cursor: pointer;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            z-index: 10;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.3);
+        }
+        .image-box:hover .view-hover-btn { opacity: 1; visibility: visible; transform: translate(-50%, -50%) scale(1); }
+        .view-hover-btn:hover { background: var(--primary); color: #000; transform: translate(-50%, -50%) scale(1.05); }
+        .modal-close {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            color: #fff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            z-index: 100;
+            backdrop-filter: blur(10px);
+        }
+        .modal-close:hover { background: #ef4444; border-color: #ef4444; transform: rotate(90deg); }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <!-- Premium Header -->
+        <header class="premium-header">
+            <div class="header-gradient-overlay"></div>
+            <div class="header-content-wrapper">
+                <div class="header-top-bar">
+                    <div class="brand-section">
+                        <div class="brand-icon">
+                            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path
+                                    d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z" />
+                                <path d="M7 12h2l1-3 2 6 1-3h2" opacity="0.9" />
+                            </svg>
+                        </div>
+                        <div class="brand-text">
+                            <h1 class="brand-title">CradleMetrics Analysis</h1>
+                            <p class="brand-subtitle">Advanced AI • Precise Segmentation • Clinical Assessment</p>
+                        </div>
+                    </div>
+                    <div style="display: flex; gap: 15px;">
+                        <a href="/patients{% if file_id %}?file_id={{ file_id }}{% endif %}" class="btn-glass"
+                            id="patientDirectoryLink">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+                                <circle cx="9" cy="7" r="4"></circle>
+                                <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
+                                <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
+                            </svg>
+                            Patient Directory
+                        </a>
+                        <a href="/" class="btn-glass">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M19 12H5M12 19l-7-7 7-7" />
+                            </svg>
+                            Back to Home
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Performance Metrics Grid -->
+                <div class="metrics-grid">
+                    <div class="metric-card metric-primary">
+                        <div class="metric-icon">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                                <polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline>
+                            </svg>
+                        </div>
+                        <div class="metric-content">
+                            <div class="metric-value" id="perf-metric-accuracy">---</div>
+                            <div class="metric-label">Plane Accuracy</div>
+                            <div class="metric-description">Orientation Precision</div>
+                        </div>
+                        <div class="metric-glow metric-glow-primary"></div>
+                    </div>
+
+                    <div class="metric-card metric-secondary">
+                        <div class="metric-icon">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                                <circle cx="12" cy="12" r="10"></circle>
+                                <circle cx="12" cy="12" r="6"></circle>
+                                <circle cx="12" cy="12" r="2"></circle>
+                            </svg>
+                        </div>
+                        <div class="metric-content">
+                            <div class="metric-value" id="perf-metric-confidence">---</div>
+                            <div class="metric-label">AI Confidence</div>
+                            <div class="metric-description">Inference Reliability</div>
+                        </div>
+                        <div class="metric-glow metric-glow-secondary"></div>
+                    </div>
+
+                    <div class="metric-card metric-accent">
+                        <div class="metric-icon">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
+                                <polyline points="22 4 12 14.01 9 11.01"></polyline>
+                            </svg>
+                        </div>
+                        <div class="metric-content">
+                            <div class="metric-value" id="perf-metric-quality">---</div>
+                            <div class="metric-label">Quality Score</div>
+                            <div class="metric-description">Anatomical Validity</div>
+                        </div>
+                        <div class="metric-glow metric-glow-accent"></div>
+                    </div>
+
+                    <div class="metric-card metric-success">
+                        <div class="metric-icon">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z" />
+                            </svg>
+                        </div>
+                        <div class="metric-content">
+                            <div class="metric-value" id="perf-metric-time">---</div>
+                            <div class="metric-label">Speed</div>
+                            <div class="metric-description">Real-time Latency</div>
+                        </div>
+                        <div class="metric-glow metric-glow-success"></div>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Upload Section -->
+            <section class="upload-section" id="uploadSection">
+                <div class="card">
+                    <div class="header-top" style="text-align: left; margin-bottom: 30px;">
+                        <h2>
+                            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                                style="vertical-align: middle; margin-right: 8px;">
+                                <rect x="2" y="3" width="20" height="14" rx="2" ry="2"></rect>
+                                <line x1="8" y1="21" x2="16" y2="21"></line>
+                                <line x1="12" y1="17" x2="12" y2="21"></line>
+                                <path d="M7 7h10"></path>
+                                <path d="M7 11h10"></path>
+                            </svg>
+                            Analyze Ultrasound
+                        </h2>
+                        <p style="color: var(--text-secondary);">Upload a scan to begin biometric extraction</p>
+                    </div>
+
+                    <div class="drop-zone" id="dropZone">
+                        <svg class="upload-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                            <polyline points="17 8 12 3 7 8"></polyline>
+                            <line x1="12" y1="3" x2="12" y2="15"></line>
+                        </svg>
+                        <p class="drop-zone-text">Drag ultrasound image here</p>
+                        <p style="margin: 15px 0; color: var(--text-muted);">or</p>
+                        <button class="btn btn-primary" id="browseBtn">Select File</button>
+                        <input type="file" id="fileInput" accept="image/*" hidden>
+                    </div>
+
+                    <div class="settings"
+                        style="margin-top: 30px; display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px;">
+                        <div class="input-group">
+                            <label
+                                style="display: block; margin-bottom: 10px; color: var(--text-secondary);">Gestational
+                                Age (Optional)</label>
+                            <input type="number" id="gaInput" placeholder="Weeks" min="14" max="42" step="0.1"
+                                style="width: 100%;">
+                        </div>
+                        <div class="input-group">
+                            <label style="display: block; margin-bottom: 10px; color: var(--text-secondary);">Patient ID
+                                (Optional)</label>
+                            <input type="text" id="patientIdInput" placeholder="e.g. PAT-12345" style="width: 100%;">
+                        </div>
+                        <div class="input-group">
+                            <label style="display: block; margin-bottom: 10px; color: var(--text-secondary);">Growth Standard</label>
+                            <select id="standardInput">
+                                <option value="INTERGROWTH" selected>INTERGROWTH-21st</option>
+                                <option value="WHO">WHO Fetal Growth</option>
+                                <option value="HADLOCK">Hadlock (Universal)</option>
+                            </select>
+                        </div>
+                    </div>
+
+
+                    <div
+                        style="margin-top: 25px; display: flex; justify-content: flex-end; gap: 12px; flex-wrap: wrap;">
+                        <button class="btn btn-glass" id="uploadResetBtn"
+                            style="padding: 12px 25px; border: 1px solid var(--glass-border); background: rgba(255, 255, 255, 0.03); color: var(--text-secondary);">
+                            New Analysis
+                        </button>
+
+                        <button class="btn btn-success" id="analyzeBtn" disabled
+                            style="padding: 12px 40px; font-weight: 700; background: var(--primary); color: #020c18;">
+                            Start Analysis
+                        </button>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Results Section (Professional Workstation Layout) -->
+            <section class="results-section hidden" id="resultsSection" style="margin-top: 0;">
+                <!-- Summary Header Strip -->
+                <div id="resultsHeaderStrip" style="display: flex; gap: 20px; align-items: center; background: rgba(6, 182, 212, 0.1); border: 1px solid var(--glass-border); padding: 15px 25px; border-radius: 16px; margin-bottom: 25px; backdrop-filter: blur(10px);">
+                    <div style="display: flex; align-items: center; gap: 10px; border-right: 1px solid rgba(255,255,255,0.1); padding-right: 20px;">
+                        <span style="font-size: 0.75rem; color: var(--text-muted); text-transform: uppercase;">Patient ID</span>
+                        <span id="headerPatientId" style="font-weight: 700; color: #fff;">-</span>
+                    </div>
+                    <div style="display: flex; align-items: center; gap: 10px; border-right: 1px solid rgba(255,255,255,0.1); padding-right: 20px;">
+                        <span style="font-size: 0.75rem; color: var(--text-muted); text-transform: uppercase;">Consensus GA</span>
+                        <span id="headerGA" style="font-weight: 700; color: var(--primary);">-</span>
+                    </div>
+                    <div style="display: flex; align-items: center; gap: 10px; border-right: 1px solid rgba(255,255,255,0.1); padding-right: 20px;">
+                        <span style="font-size: 0.75rem; color: var(--text-muted); text-transform: uppercase;">EDD</span>
+                        <span id="headerEDD" style="font-weight: 700; color: var(--secondary);">-</span>
+                    </div>
+                    <div style="display: flex; align-items: center; gap: 10px;">
+                        <span style="font-size: 0.75rem; color: var(--text-muted); text-transform: uppercase;">Overall Risk</span>
+                        <span id="headerRisk" class="status-badge" style="background: rgba(16, 185, 129, 0.2); color: #10b981;">NORMAL</span>
+                    </div>
+                    <div style="margin-left: auto; display: flex; gap: 10px;">
+                        <button class="btn btn-glass btn-sm" id="headerViewPDFBtn">View PDF</button>
+                        <button class="btn btn-glass btn-sm" id="headerDownloadPDFBtn">Download PDF</button>
+                    </div>
+                </div>
+
+                <!-- Navigation Tabs -->
+                <div class="results-tabs" style="display: flex; gap: 15px; border-bottom: 1px solid rgba(255,255,255,0.1); margin-bottom: 25px; padding-bottom: 5px;">
+                    <button class="res-tab-btn active" onclick="switchResultTab('analysis')" data-tab="analysis">Analysis Dashboard</button>
+                    <button class="res-tab-btn" onclick="switchResultTab('growth-res')" data-tab="growth-res">Growth Trends</button>
+                    <button class="res-tab-btn" onclick="switchResultTab('advanced')" data-tab="advanced">Advanced Metrics</button>
+                </div>
+
+                <!-- Tab 1: Analysis Dashboard -->
+                <div id="tab-analysis" class="tab-content-panel active">
+                    <div class="analysis-grid" style="display: grid; grid-template-columns: 1.2fr 1fr; gap: 30px; align-items: flex-start;">
+                        <!-- Left: Visualization -->
+                        <div class="visualization-col" style="display: flex; flex-direction: column; gap: 20px;">
+                            <div class="card" style="padding: 20px; margin-bottom: 0;">
+                                <h3 style="margin-bottom: 25px; font-size: 1.1rem; display: flex; align-items: center; gap: 12px; color: var(--text-pure);">
+                                    <div style="width: 32px; height: 32px; background: rgba(6, 182, 212, 0.15); border-radius: 8px; display: flex; align-items: center; justify-content: center; color: var(--primary);">
+                                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                                            <path d="M3 7V5a2 2 0 0 1 2-2h2"/><path d="M17 3h2a2 2 0 0 1 2 2v2"/><path d="M21 17v2a2 2 0 0 1-2 2h-2"/><path d="M7 21H5a2 2 0 0 1-2-2v-2"/><line x1="7" y1="12" x2="17" y2="12"/>
+                                        </svg>
+                                    </div>
+                                    <span>Ultrasound Mapping</span>
+                                </h3>
+                                <div class="image-comparison-grid" style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px;">
+                                    <div class="image-box" style="position: relative; background: #000; border-radius: 12px; overflow: hidden; border: 1px solid var(--glass-border);">
+                                        <div class="box-label" style="position: absolute; top: 8px; left: 8px; background: rgba(0,0,0,0.6); color: #fff; padding: 4px 8px; border-radius: 4px; font-size: 0.7rem; z-index: 2;">Segmentation</div>
+                                        <div class="image-wrapper" style="aspect-ratio: 4/3; display: flex; align-items: center; justify-content: center;">
+                                            <img id="resultImage" src="" alt="Output" style="max-width: 100%; max-height: 100%;">
+                                        </div>
+                                        <button class="view-hover-btn" onclick="openImageModal('resultImage')">
+                                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/><line x1="11" y1="8" x2="11" y2="14"/><line x1="8" y1="11" x2="14" y2="11"/></svg>
+                                            View Larger
+                                        </button>
+                                    </div>
+                                    <div class="image-box" style="position: relative; background: #000; border-radius: 12px; overflow: hidden; border: 1px solid var(--glass-border);">
+                                        <div class="box-label" style="position: absolute; top: 8px; left: 8px; background: rgba(0,0,0,0.6); color: #fff; padding: 4px 8px; border-radius: 4px; font-size: 0.7rem; z-index: 2;">Original</div>
+                                        <div class="image-wrapper" style="aspect-ratio: 4/3; display: flex; align-items: center; justify-content: center;">
+                                            <img id="originalImage" src="" alt="Input" style="max-width: 100%; max-height: 100%;">
+                                        </div>
+                                        <button class="view-hover-btn" onclick="openImageModal('originalImage')">
+                                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/><line x1="11" y1="8" x2="11" y2="14"/><line x1="8" y1="11" x2="14" y2="11"/></svg>
+                                            View Original
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- Overall Clinical Risk Card -->
+                            <div id="clinicalAssessment"></div>
+
+                        </div>
+
+                        <!-- Right: Measurements & Actions -->
+                        <div class="data-col" style="display: flex; flex-direction: column; gap: 20px;">
+                            <div class="card" id="measurementsCard" style="margin-bottom: 0; position: relative;">
+                                <h3 style="margin-bottom: 25px; font-size: 1.1rem; display: flex; align-items: center; justify-content: space-between; color: var(--text-pure);">
+                                    <div style="display: flex; align-items: center; gap: 12px;">
+                                        <div style="width: 32px; height: 32px; background: rgba(6, 182, 212, 0.15); border-radius: 8px; display: flex; align-items: center; justify-content: center; color: var(--primary);">
+                                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                                                <circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/><line x1="11" y1="8" x2="11" y2="14"/><line x1="8" y1="11" x2="14" y2="11"/>
+                                            </svg>
+                                        </div>
+                                        <span>Biometric Data</span>
+                                    </div>
+                                    <button onclick="toggleClinicalSettings()" style="background: none; border: none; color: var(--text-secondary); cursor: pointer;">
+                                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12.22 2h-.44a2 2 0 0 0-2 2v.18a2 2 0 0 1-1 1.73l-.43.25a2 2 0 0 1-2 0l-.15-.08a2 2 0 0 0-2.73.73l-.22.38a2 2 0 0 0 .73 2.73l.15.1a2 2 0 0 1 1 1.72v.51a2 2 0 0 1-1 1.74l-.15.09a2 2 0 0 0-.73 2.73l.22.38a2 2 0 0 0 2.73.73l.15-.08a2 2 0 0 1 2 0l.43.25a2 2 0 0 1 1 1.73V20a2 2 0 0 0 2 2h.44a2 2 0 0 0 2-2v-.18a2 2 0 0 1 1-1.73l.43-.25a2 2 0 0 1 2 0l.15.08a2 2 0 0 0 2.73-.73l.22-.39a2 2 0 0 0-.73-2.73l-.15-.08a2 2 0 0 1-1-1.74v-.5a2 2 0 0 1 1-1.74l.15-.09a2 2 0 0 0 .73-2.73l-.22-.38a2 2 0 0 0-2.73-.73l-.15.08a2 2 0 0 1-2 0l-.43-.25a2 2 0 0 1-1-1.73V4a2 2 0 0 0-2-2z"/><circle cx="12" cy="12" r="3"/></svg>
+                                    </button>
+                                </h3>
+                                <div id="measurementsGrid"></div>
+                                
+                                <!-- Hidden Settings Panel (Toggled by Gear Icon) -->
+                                <div id="clinicalSettingsPanel" class="hidden" style="position: absolute; top: 60px; right: 20px; width: 220px; background: #04111f; border: 1px solid var(--glass-border); border-radius: 12px; padding: 15px; box-shadow: 0 10px 30px rgba(0,0,0,0.5); z-index: 100;">
+                                    <div style="margin-bottom: 12px; font-size: 0.8rem; color: var(--text-muted); text-transform: uppercase; font-weight: 700;">Growth Standards</div>
+                                    <select id="resultsStandardInput" onchange="applyStandardChange(this.value)" style="width: 100%; padding: 8px; background: rgba(255,255,255,0.05); border: 1px solid var(--glass-border); border-radius: 6px; color: #fff; font-size: 0.85rem; outline: none;">
+                                        <option value="INTERGROWTH">INTERGROWTH-21st</option>
+                                        <option value="WHO">WHO Fetal Growth</option>
+                                        <option value="HADLOCK">Hadlock (Universal)</option>
+                                    </select>
+                                    <div style="margin-top: 10px; font-size: 0.7rem; color: var(--text-muted);">Switching standards will instantly update clinical percentiles.</div>
+                                </div>
+                            </div>
+                            
+                            <!-- Secondary Actions -->
+                            <div class="card" style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px; padding: 20px;">
+                                <button class="btn btn-secondary btn-sm" id="newAnalysisBtn">New Analysis</button>
+                                <button class="btn btn-primary btn-sm" id="analyseAgainBtn">Analyse Again</button>
+                            </div>
+                            
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Tab 2: Growth Trends -->
+                <div id="tab-growth-res" class="tab-content-panel hidden">
+                    <div class="card" id="growthAnalyticsCard" style="padding: 25px;">
+                        <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 25px;">
+                            <h3 style="font-size: 1.25rem; display: flex; align-items: center; gap: 12px; color: var(--text-pure); margin: 0;">
+                                <div style="width: 32px; height: 32px; background: rgba(6, 182, 212, 0.15); border-radius: 8px; display: flex; align-items: center; justify-content: center; color: var(--primary);">
+                                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M18 20V10"/><path d="M12 20V4"/><path d="M6 20v-6"/></svg>
+                                </div>
+                                <span>Longitudinal Growth Analysis</span>
+                            </h3>
+                            <div id="growthStandardControls" style="display: flex; background: rgba(255,255,255,0.03); padding: 4px; border-radius: 10px; border: 1px solid var(--glass-border);">
+                                <button class="btn btn-glass btn-xs active" onclick="updateChartStandard('INTERGROWTH')" data-std="INTERGROWTH" style="padding: 6px 12px; font-size: 0.75rem;">INTERGROWTH-21</button>
+                                <button class="btn btn-glass btn-xs" onclick="updateChartStandard('WHO')" data-std="WHO" style="padding: 6px 12px; font-size: 0.75rem;">WHO</button>
+                                <button class="btn btn-glass btn-xs" onclick="updateChartStandard('HADLOCK')" data-std="HADLOCK" style="padding: 6px 12px; font-size: 0.75rem;">HADLOCK</button>
+                            </div>
+                        </div>
+                        
+                        <div style="height: 450px; background: rgba(0,0,0,0.15); border-radius: 12px; padding: 20px; border: 1px solid var(--glass-border); position: relative;">
+                            <canvas id="growthChart" style="width: 100%; height: 100%;"></canvas>
+                        </div>
+
+                        <div id="growthChartControls" style="margin-top: 25px; display: flex; gap: 10px; flex-wrap: wrap; align-items: center;">
+                            <div style="display: flex; gap: 8px; flex-wrap: wrap;" id="metricButtons">
+                                <button class="btn btn-glass btn-sm active" onclick="updateChartMetric('HC')">Head (HC)</button>
+                                <button class="btn btn-glass btn-sm" onclick="updateChartMetric('AC')">Abdomen (AC)</button>
+                                <button class="btn btn-glass btn-sm" onclick="updateChartMetric('BPD')">Diameter (BPD)</button>
+                                <button class="btn btn-glass btn-sm" onclick="updateChartMetric('FL')">Femur (FL)</button>
+                                <button class="btn btn-glass btn-sm" onclick="updateChartMetric('EFW')">Weight (EFW)</button>
+                            </div>
+                            <div style="margin-left: auto; display: flex; gap: 10px;">
+                                <button id="zScoreToggleBtn" class="btn btn-glass btn-sm" onclick="toggleZScoreView(this)">Z-Score View</button>
+                                <button id="standardsOverlayBtn" class="btn btn-glass btn-sm" onclick="toggleStandardsOverlay(this, currentPatientId)">Compare Standards</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Tab 3: Advanced Metrics -->
+                <div id="tab-advanced" class="tab-content-panel hidden">
+                    <div id="advancedAnalyticsContainer">
+                        <!-- Multi-Standard Consensus Card -->
+                        <div class="card" id="consensusCard" style="padding: 25px; margin-bottom: 25px;">
+                            <h3 style="font-size: 1.25rem; display: flex; align-items: center; gap: 12px; color: var(--text-pure); margin-bottom: 25px;">
+                                <div style="width: 32px; height: 32px; background: rgba(16, 185, 129, 0.15); border-radius: 8px; display: flex; align-items: center; justify-content: center; color: var(--success);">
+                                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+                                </div>
+                                <span>Multi-Standard Consensus</span>
+                            </h3>
+                            
+                            <div id="discordanceBanner" class="hidden" style="margin-bottom: 20px; padding: 15px; background: rgba(239, 68, 68, 0.1); border: 1px solid rgba(239, 68, 68, 0.2); border-radius: 10px; color: #fca5a5; display: flex; align-items: center; gap: 12px;">
+                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+                                <div>
+                                    <strong style="display: block;">Inconsistent Clinical Classification</strong>
+                                    <span style="font-size: 0.85rem; opacity: 0.9;">Standards disagree on growth interpretation. Physician review required.</span>
+                                </div>
+                            </div>
+
+                            <div id="consensusGrid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px;">
+                                <!-- Consensus rows injected here -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Processing Overlay/Section -->
+            <section class="processing-section hidden" id="processingSection">
+                <div class="card" style="text-align: center; max-width: 600px; margin: 40px auto;">
+                    <h2 style="margin-bottom: 10px;">⚙️ Pipeline Active</h2>
+                    <p style="color: var(--text-secondary); margin-bottom: 30px;">Applying deformable transformers and
+                        spatial sampling...</p>
+
+                    <div class="progress-bar">
+                        <div class="progress-fill" id="progressFill" style="width: 20%;"></div>
+                    </div>
+                    <p id="progressText" style="font-weight: 600;">Processing...</p>
+                </div>
+            </section>
+        </main>
+
+        <!-- Footer -->
+        <footer class="footer">
+            <p>Powered by Advanced AI • Deep Learning • Clinical Standards</p>
+        </footer>
+
+
+
+        <!-- Fullscreen Image Modal -->
+        <div id="imageModal" class="image-modal hidden" onclick="closeImageModal()">
+            <div class="modal-content">
+                <button class="modal-close" onclick="closeImageModal()" title="Close (ESC)">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+                        stroke-linecap="round" stroke-linejoin="round">
+                        <line x1="18" y1="6" x2="6" y2="18"></line>
+                        <line x1="6" y1="6" x2="18" y2="18"></line>
+                    </svg>
+                </button>
+                <img id="modalImage" src="" alt="Fullscreen View">
+                <div class="modal-label" id="modalLabel"></div>
+            </div>
+        </div>
+    </div>
+
+    <script src="{{ url_for('static', filename='js/main.js') }}?v=3.0"></script>
+</body>
+
+</html>

@@ -1,0 +1,49 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+.venv/
+env/
+venv/
+ENV/
+
+# Models
+*.pth
+*.pt
+yolo11n.pt
+yolov8s.pt
+sam_vit_b_01ec64.pth
+
+# Datasets & Large Folders
+annotation/
+box_annotation/
+clinical_history/
+four_poses/
+yolo_dataset/
+
+# Results & Uploads
+automatic_results/
+batch_results/
+feature_test_results/
+sam_results/
+web_app/uploads/
+web_app/results/
+web_app/reports/
+runs/
+*.pdf
+
+# Logs & Temp
+*.log
+*.tmp
+*.bak
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Documentation (Local Only)
+CRADLEMETRICS.md
+INSTALLATION.md
+QUICKSTART.md
+RUN_GUIDE.md
+version 3.md

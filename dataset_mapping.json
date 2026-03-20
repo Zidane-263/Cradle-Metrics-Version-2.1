@@ -1,0 +1,451 @@
+{
+    "dataset_info": {
+        "name": "Zidane Video Annotation Dataset",
+        "version": "1.0",
+        "created": "2026-01-03",
+        "total_streams": 39,
+        "base_path": "c:/Projects/Zidane"
+    },
+    "directory_structure": {
+        "frames": "four_poses",
+        "annotations": "annotation",
+        "box_annotations": "box_annotation"
+    },
+    "streams": [
+        {
+            "stream_id": "stream_hdvb_aroundabd_h",
+            "type": "hdvb",
+            "location": "aroundabd",
+            "orientation": "horizontal",
+            "frames_dir": "c:/Projects/Zidane/four_poses/stream_hdvb_aroundabd_h",
+            "annotation_file": "c:/Projects/Zidane/annotation/stream_hdvb_aroundabd_h/annotations.xml",
+            "box_annotation_file": "c:/Projects/Zidane/box_annotation/stream_hdvb_aroundabd_h/annotations.xml",
+            "frame_pattern": "frame_{:06d}.png",
+            "frame_start": 0
+        },
+        {
+            "stream_id": "stream_hdvb_aroundabd_v",
+            "type": "hdvb",
+            "location": "aroundabd",
+            "orientation": "vertical",
+            "frames_dir": "c:/Projects/Zidane/four_poses/stream_hdvb_aroundabd_v",
+            "annotation_file": "c:/Projects/Zidane/annotation/stream_hdvb_aroundabd_v/annotations.xml",
+            "box_annotation_file": "c:/Projects/Zidane/box_annotation/stream_hdvb_aroundabd_v/annotations.xml",
+            "frame_pattern": "frame_{:06d}.png",
+            "frame_start": 0
+        },
+        {
+            "stream_id": "stream_hdvb_aroundarms_h",
+            "type": "hdvb",
+            "location": "aroundarms",
+            "orientation": "horizontal",
+            "frames_dir": "c:/Projects/Zidane/four_poses/stream_hdvb_aroundarms_h",
+            "annotation_file": "c:/Projects/Zidane/annotation/stream_hdvb_aroundarms_h/annotations.xml",
+            "box_annotation_file": "c:/Projects/Zidane/box_annotation/stream_hdvb_aroundarms_h/annotations.xml",
+            "frame_pattern": "frame_{:06d}.png",
+            "frame_start": 0
+        },
+        {
+            "stream_id": "stream_hdvb_aroundarms_v",
+            "type": "hdvb",
+            "location": "aroundarms",
+            "orientation": "vertical",
+            "frames_dir": "c:/Projects/Zidane/four_poses/stream_hdvb_aroundarms_v",
+            "annotation_file": "c:/Projects/Zidane/annotation/stream_hdvb_aroundarms_v/annotations.xml",
+            "box_annotation_file": "c:/Projects/Zidane/box_annotation/stream_hdvb_aroundarms_v/annotations.xml",
+            "frame_pattern": "frame_{:06d}.png",
+            "frame_start": 0
+        },
+        {
+            "stream_id": "stream_hdvb_aroundhead_h",
+            "type": "hdvb",
+            "location": "aroundhead",
+            "orientation": "horizontal",
+            "frames_dir": "c:/Projects/Zidane/four_poses/stream_hdvb_aroundhead_h",
+            "annotation_file": "c:/Projects/Zidane/annotation/stream_hdvb_aroundhead_h/annotations.xml",
+            "box_annotation_file": "c:/Projects/Zidane/box_annotation/stream_hdvb_aroundhead_h/annotations.xml",
+            "frame_pattern": "frame_{:06d}.png",
+            "frame_start": 0
+        },
+        {
+            "stream_id": "stream_hdvb_aroundhead_v",
+            "type": "hdvb",
+            "location": "aroundhead",
+            "orientation": "vertical",
+            "frames_dir": "c:/Projects/Zidane/four_poses/stream_hdvb_aroundhead_v",
+            "annotation_file": "c:/Projects/Zidane/annotation/stream_hdvb_aroundhead_v/annotations.xml",
+            "box_annotation_file": "c:/Projects/Zidane/box_annotation/stream_hdvb_aroundhead_v/annotations.xml",
+            "frame_pattern": "frame_{:06d}.png",
+            "frame_start": 0
+        },
+        {
+            "stream_id": "stream_hdvb_aroundlegs_h",
+            "type": "hdvb",
+            "location": "aroundlegs",
+            "orientation": "horizontal",
+            "frames_dir": "c:/Projects/Zidane/four_poses/stream_hdvb_aroundlegs_h",
+            "annotation_file": "c:/Projects/Zidane/annotation/stream_hdvb_aroundlegs_h/annotations.xml",
+            "box_annotation_file": "c:/Projects/Zidane/box_annotation/stream_hdvb_aroundlegs_h/annotations.xml",
+            "frame_pattern": "frame_{:06d}.png",
+            "frame_start": 0
+        },
+        {
+            "stream_id": "stream_hdvb_aroundlegs_v",
+            "type": "hdvb",
+            "location": "aroundlegs",
+            "orientation": "vertical",
+            "frames_dir": "c:/Projects/Zidane/four_poses/stream_hdvb_aroundlegs_v",
+            "annotation_file": "c:/Projects/Zidane/annotation/stream_hdvb_aroundlegs_v/annotations.xml",
+            "box_annotation_file": "c:/Projects/Zidane/box_annotation/stream_hdvb_aroundlegs_v/annotations.xml",
+            "frame_pattern": "frame_{:06d}.png",
+            "frame_start": 0
+        },
+        {
+            "stream_id": "stream_hdvb_longrec_h",
+            "type": "hdvb",
+            "location": "longrec",
+            "orientation": "horizontal",
+            "frames_dir": "c:/Projects/Zidane/four_poses/stream_hdvb_longrec_h",
+            "annotation_file": "c:/Projects/Zidane/annotation/stream_hdvb_longrec_h/annotations.xml",
+            "box_annotation_file": "c:/Projects/Zidane/box_annotation/stream_hdvb_longrec_h/annotations.xml",
+            "frame_pattern": "frame_{:06d}.png",
+            "frame_start": 0
+        },
+        {
+            "stream_id": "stream_hdvb_longrec_v",
+            "type": "hdvb",
+            "location": "longrec",
+            "orientation": "vertical",
+            "frames_dir": "c:/Projects/Zidane/four_poses/stream_hdvb_longrec_v",
+            "annotation_file": "c:/Projects/Zidane/annotation/stream_hdvb_longrec_v/annotations.xml",
+            "box_annotation_file": "c:/Projects/Zidane/box_annotation/stream_hdvb_longrec_v/annotations.xml",
+            "frame_pattern": "frame_{:06d}.png",
+            "frame_start": 0
+        },
+        {
+            "stream_id": "stream_hdvf_aroundabd_h",
+            "type": "hdvf",
+            "location": "aroundabd",
+            "orientation": "horizontal",
+            "frames_dir": "c:/Projects/Zidane/four_poses/stream_hdvf_aroundabd_h",
+            "annotation_file": "c:/Projects/Zidane/annotation/stream_hdvf_aroundabd_h/annotations.xml",
+            "box_annotation_file": "c:/Projects/Zidane/box_annotation/stream_hdvf_aroundabd_h/annotations.xml",
+            "frame_pattern": "frame_{:06d}.png",
+            "frame_start": 0
+        },
+        {
+            "stream_id": "stream_hdvf_aroundabd_v",
+            "type": "hdvf",
+            "location": "aroundabd",
+            "orientation": "vertical",
+            "frames_dir": "c:/Projects/Zidane/four_poses/stream_hdvf_aroundabd_v",
+            "annotation_file": "c:/Projects/Zidane/annotation/stream_hdvf_aroundabd_v/annotations.xml",
+            "box_annotation_file": "c:/Projects/Zidane/box_annotation/stream_hdvf_aroundabd_v/annotations.xml",
+            "frame_pattern": "frame_{:06d}.png",
+            "frame_start": 0
+        },
+        {
+            "stream_id": "stream_hdvf_aroundarms_h",
+            "type": "hdvf",
+            "location": "aroundarms",
+            "orientation": "horizontal",
+            "frames_dir": "c:/Projects/Zidane/four_poses/stream_hdvf_aroundarms_h",
+            "annotation_file": "c:/Projects/Zidane/annotation/stream_hdvf_aroundarms_h/annotations.xml",
+            "box_annotation_file": "c:/Projects/Zidane/box_annotation/stream_hdvf_aroundarms_h/annotations.xml",
+            "frame_pattern": "frame_{:06d}.png",
+            "frame_start": 0
+        },
+        {
+            "stream_id": "stream_hdvf_aroundarms_v",
+            "type": "hdvf",
+            "location": "aroundarms",
+            "orientation": "vertical",
+            "frames_dir": "c:/Projects/Zidane/four_poses/stream_hdvf_aroundarms_v",
+            "annotation_file": "c:/Projects/Zidane/annotation/stream_hdvf_aroundarms_v/annotations.xml",
+            "box_annotation_file": "c:/Projects/Zidane/box_annotation/stream_hdvf_aroundarms_v/annotations.xml",
+            "frame_pattern": "frame_{:06d}.png",
+            "frame_start": 0
+        },
+        {
+            "stream_id": "stream_hdvf_aroundhead_h",
+            "type": "hdvf",
+            "location": "aroundhead",
+            "orientation": "horizontal",
+            "frames_dir": "c:/Projects/Zidane/four_poses/stream_hdvf_aroundhead_h",
+            "annotation_file": "c:/Projects/Zidane/annotation/stream_hdvf_aroundhead_h/annotations.xml",
+            "box_annotation_file": "c:/Projects/Zidane/box_annotation/stream_hdvf_aroundhead_h/annotations.xml",
+            "frame_pattern": "frame_{:06d}.png",
+            "frame_start": 0
+        },
+        {
+            "stream_id": "stream_hdvf_aroundhead_v",
+            "type": "hdvf",
+            "location": "aroundhead",
+            "orientation": "vertical",
+            "frames_dir": "c:/Projects/Zidane/four_poses/stream_hdvf_aroundhead_v",
+            "annotation_file": "c:/Projects/Zidane/annotation/stream_hdvf_aroundhead_v/annotations.xml",
+            "box_annotation_file": "c:/Projects/Zidane/box_annotation/stream_hdvf_aroundhead_v/annotations.xml",
+            "frame_pattern": "frame_{:06d}.png",
+            "frame_start": 0
+        },
+        {
+            "stream_id": "stream_hdvf_aroundlegs_h",
+            "type": "hdvf",
+            "location": "aroundlegs",
+            "orientation": "horizontal",
+            "frames_dir": "c:/Projects/Zidane/four_poses/stream_hdvf_aroundlegs_h",
+            "annotation_file": "c:/Projects/Zidane/annotation/stream_hdvf_aroundlegs_h/annotations.xml",
+            "box_annotation_file": "c:/Projects/Zidane/box_annotation/stream_hdvf_aroundlegs_h/annotations.xml",
+            "frame_pattern": "frame_{:06d}.png",
+            "frame_start": 0
+        },
+        {
+            "stream_id": "stream_hdvf_aroundlegs_v",
+            "type": "hdvf",
+            "location": "aroundlegs",
+            "orientation": "vertical",
+            "frames_dir": "c:/Projects/Zidane/four_poses/stream_hdvf_aroundlegs_v",
+            "annotation_file": "c:/Projects/Zidane/annotation/stream_hdvf_aroundlegs_v/annotations.xml",
+            "box_annotation_file": "c:/Projects/Zidane/box_annotation/stream_hdvf_aroundlegs_v/annotations.xml",
+            "frame_pattern": "frame_{:06d}.png",
+            "frame_start": 0
+        },
+        {
+            "stream_id": "stream_hdvf_longrec_h",
+            "type": "hdvf",
+            "location": "longrec",
+            "orientation": "horizontal",
+            "frames_dir": "c:/Projects/Zidane/four_poses/stream_hdvf_longrec_h",
+            "annotation_file": "c:/Projects/Zidane/annotation/stream_hdvf_longrec_h/annotations.xml",
+            "box_annotation_file": "c:/Projects/Zidane/box_annotation/stream_hdvf_longrec_h/annotations.xml",
+            "frame_pattern": "frame_{:06d}.png",
+            "frame_start": 0
+        },
+        {
+            "stream_id": "stream_hdvf_longrec_v",
+            "type": "hdvf",
+            "location": "longrec",
+            "orientation": "vertical",
+            "frames_dir": "c:/Projects/Zidane/four_poses/stream_hdvf_longrec_v",
+            "annotation_file": "c:/Projects/Zidane/annotation/stream_hdvf_longrec_v/annotations.xml",
+            "box_annotation_file": "c:/Projects/Zidane/box_annotation/stream_hdvf_longrec_v/annotations.xml",
+            "frame_pattern": "frame_{:06d}.png",
+            "frame_start": 0
+        },
+        {
+            "stream_id": "stream_huvb_aroundarms_h",
+            "type": "huvb",
+            "location": "aroundarms",
+            "orientation": "horizontal",
+            "frames_dir": "c:/Projects/Zidane/four_poses/stream_huvb_aroundarms_h",
+            "annotation_file": "c:/Projects/Zidane/annotation/stream_huvb_aroundarms_h/annotations.xml",
+            "box_annotation_file": "c:/Projects/Zidane/box_annotation/stream_huvb_aroundarms_h/annotations.xml",
+            "frame_pattern": "frame_{:06d}.png",
+            "frame_start": 0
+        },
+        {
+            "stream_id": "stream_huvb_aroundarms_v",
+            "type": "huvb",
+            "location": "aroundarms",
+            "orientation": "vertical",
+            "frames_dir": "c:/Projects/Zidane/four_poses/stream_huvb_aroundarms_v",
+            "annotation_file": "c:/Projects/Zidane/annotation/stream_huvb_aroundarms_v/annotations.xml",
+            "box_annotation_file": "c:/Projects/Zidane/box_annotation/stream_huvb_aroundarms_v/annotations.xml",
+            "frame_pattern": "frame_{:06d}.png",
+            "frame_start": 0
+        },
+        {
+            "stream_id": "stream_huvb_aroundhead_h",
+            "type": "huvb",
+            "location": "aroundhead",
+            "orientation": "horizontal",
+            "frames_dir": "c:/Projects/Zidane/four_poses/stream_huvb_aroundhead_h",
+            "annotation_file": "c:/Projects/Zidane/annotation/stream_huvb_aroundhead_h/annotations.xml",
+            "box_annotation_file": "c:/Projects/Zidane/box_annotation/stream_huvb_aroundhead_h/annotations.xml",
+            "frame_pattern": "frame_{:06d}.png",
+            "frame_start": 0
+        },
+        {
+            "stream_id": "stream_huvb_aroundhead_v",
+            "type": "huvb",
+            "location": "aroundhead",
+            "orientation": "vertical",
+            "frames_dir": "c:/Projects/Zidane/four_poses/stream_huvb_aroundhead_v",
+            "annotation_file": "c:/Projects/Zidane/annotation/stream_huvb_aroundhead_v/annotations.xml",
+            "box_annotation_file": "c:/Projects/Zidane/box_annotation/stream_huvb_aroundhead_v/annotations.xml",
+            "frame_pattern": "frame_{:06d}.png",
+            "frame_start": 0
+        },
+        {
+            "stream_id": "stream_huvb_aroundlegs_h",
+            "type": "huvb",
+            "location": "aroundlegs",
+            "orientation": "horizontal",
+            "frames_dir": "c:/Projects/Zidane/four_poses/stream_huvb_aroundlegs_h",
+            "annotation_file": "c:/Projects/Zidane/annotation/stream_huvb_aroundlegs_h/annotations.xml",
+            "box_annotation_file": "c:/Projects/Zidane/box_annotation/stream_huvb_aroundlegs_h/annotations.xml",
+            "frame_pattern": "frame_{:06d}.png",
+            "frame_start": 0
+        },
+        {
+            "stream_id": "stream_huvb_aroundlegs_v",
+            "type": "huvb",
+            "location": "aroundlegs",
+            "orientation": "vertical",
+            "frames_dir": "c:/Projects/Zidane/four_poses/stream_huvb_aroundlegs_v",
+            "annotation_file": "c:/Projects/Zidane/annotation/stream_huvb_aroundlegs_v/annotations.xml",
+            "box_annotation_file": "c:/Projects/Zidane/box_annotation/stream_huvb_aroundlegs_v/annotations.xml",
+            "frame_pattern": "frame_{:06d}.png",
+            "frame_start": 0
+        },
+        {
+            "stream_id": "stream_huvb_aroundsbd_h",
+            "type": "huvb",
+            "location": "aroundsbd",
+            "orientation": "horizontal",
+            "frames_dir": "c:/Projects/Zidane/four_poses/stream_huvb_aroundsbd_h",
+            "annotation_file": "c:/Projects/Zidane/annotation/stream_huvb_aroundsbd_h/annotations.xml",
+            "box_annotation_file": "c:/Projects/Zidane/box_annotation/stream_huvb_aroundsbd_h/annotations.xml",
+            "frame_pattern": "frame_{:06d}.png",
+            "frame_start": 0
+        },
+        {
+            "stream_id": "stream_huvb_longrec_h",
+            "type": "huvb",
+            "location": "longrec",
+            "orientation": "horizontal",
+            "frames_dir": "c:/Projects/Zidane/four_poses/stream_huvb_longrec_h",
+            "annotation_file": "c:/Projects/Zidane/annotation/stream_huvb_longrec_h/annotations.xml",
+            "box_annotation_file": "c:/Projects/Zidane/box_annotation/stream_huvb_longrec_h/annotations.xml",
+            "frame_pattern": "frame_{:06d}.png",
+            "frame_start": 0
+        },
+        {
+            "stream_id": "stream_huvb_longrec_v",
+            "type": "huvb",
+            "location": "longrec",
+            "orientation": "vertical",
+            "frames_dir": "c:/Projects/Zidane/four_poses/stream_huvb_longrec_v",
+            "annotation_file": "c:/Projects/Zidane/annotation/stream_huvb_longrec_v/annotations.xml",
+            "box_annotation_file": "c:/Projects/Zidane/box_annotation/stream_huvb_longrec_v/annotations.xml",
+            "frame_pattern": "frame_{:06d}.png",
+            "frame_start": 0
+        },
+        {
+            "stream_id": "stream_huvf_aroundabd_h",
+            "type": "huvf",
+            "location": "aroundabd",
+            "orientation": "horizontal",
+            "frames_dir": "c:/Projects/Zidane/four_poses/stream_huvf_aroundabd_h",
+            "annotation_file": "c:/Projects/Zidane/annotation/stream_huvf_aroundabd_h/annotations.xml",
+            "box_annotation_file": "c:/Projects/Zidane/box_annotation/stream_huvf_aroundabd_h/annotations.xml",
+            "frame_pattern": "frame_{:06d}.png",
+            "frame_start": 0
+        },
+        {
+            "stream_id": "stream_huvf_aroundabd_v",
+            "type": "huvf",
+            "location": "aroundabd",
+            "orientation": "vertical",
+            "frames_dir": "c:/Projects/Zidane/four_poses/stream_huvf_aroundabd_v",
+            "annotation_file": "c:/Projects/Zidane/annotation/stream_huvf_aroundabd_v/annotations.xml",
+            "box_annotation_file": "c:/Projects/Zidane/box_annotation/stream_huvf_aroundabd_v/annotations.xml",
+            "frame_pattern": "frame_{:06d}.png",
+            "frame_start": 0
+        },
+        {
+            "stream_id": "stream_huvf_aroundarms_h",
+            "type": "huvf",
+            "location": "aroundarms",
+            "orientation": "horizontal",
+            "frames_dir": "c:/Projects/Zidane/four_poses/stream_huvf_aroundarms_h",
+            "annotation_file": "c:/Projects/Zidane/annotation/stream_huvf_aroundarms_h/annotations.xml",
+            "box_annotation_file": "c:/Projects/Zidane/box_annotation/stream_huvf_aroundarms_h/annotations.xml",
+            "frame_pattern": "frame_{:06d}.png",
+            "frame_start": 0
+        },
+        {
+            "stream_id": "stream_huvf_aroundarms_v",
+            "type": "huvf",
+            "location": "aroundarms",
+            "orientation": "vertical",
+            "frames_dir": "c:/Projects/Zidane/four_poses/stream_huvf_aroundarms_v",
+            "annotation_file": "c:/Projects/Zidane/annotation/stream_huvf_aroundarms_v/annotations.xml",
+            "box_annotation_file": "c:/Projects/Zidane/box_annotation/stream_huvf_aroundarms_v/annotations.xml",
+            "frame_pattern": "frame_{:06d}.png",
+            "frame_start": 0
+        },
+        {
+            "stream_id": "stream_huvf_aroundhead_h",
+            "type": "huvf",
+            "location": "aroundhead",
+            "orientation": "horizontal",
+            "frames_dir": "c:/Projects/Zidane/four_poses/stream_huvf_aroundhead_h",
+            "annotation_file": "c:/Projects/Zidane/annotation/stream_huvf_aroundhead_h/annotations.xml",
+            "box_annotation_file": "c:/Projects/Zidane/box_annotation/stream_huvf_aroundhead_h/annotations.xml",
+            "frame_pattern": "frame_{:06d}.png",
+            "frame_start": 0
+        },
+        {
+            "stream_id": "stream_huvf_aroundhead_v",
+            "type": "huvf",
+            "location": "aroundhead",
+            "orientation": "vertical",
+            "frames_dir": "c:/Projects/Zidane/four_poses/stream_huvf_aroundhead_v",
+            "annotation_file": "c:/Projects/Zidane/annotation/stream_huvf_aroundhead_v/annotations.xml",
+            "box_annotation_file": "c:/Projects/Zidane/box_annotation/stream_huvf_aroundhead_v/annotations.xml",
+            "frame_pattern": "frame_{:06d}.png",
+            "frame_start": 0
+        },
+        {
+            "stream_id": "stream_huvf_aroundlegs_h",
+            "type": "huvf",
+            "location": "aroundlegs",
+            "orientation": "horizontal",
+            "frames_dir": "c:/Projects/Zidane/four_poses/stream_huvf_aroundlegs_h",
+            "annotation_file": "c:/Projects/Zidane/annotation/stream_huvf_aroundlegs_h/annotations.xml",
+            "box_annotation_file": "c:/Projects/Zidane/box_annotation/stream_huvf_aroundlegs_h/annotations.xml",
+            "frame_pattern": "frame_{:06d}.png",
+            "frame_start": 0
+        },
+        {
+            "stream_id": "stream_huvf_aroundlegs_v",
+            "type": "huvf",
+            "location": "aroundlegs",
+            "orientation": "vertical",
+            "frames_dir": "c:/Projects/Zidane/four_poses/stream_huvf_aroundlegs_v",
+            "annotation_file": "c:/Projects/Zidane/annotation/stream_huvf_aroundlegs_v/annotations.xml",
+            "box_annotation_file": "c:/Projects/Zidane/box_annotation/stream_huvf_aroundlegs_v/annotations.xml",
+            "frame_pattern": "frame_{:06d}.png",
+            "frame_start": 0
+        },
+        {
+            "stream_id": "stream_huvf_longrec_h",
+            "type": "huvf",
+            "location": "longrec",
+            "orientation": "horizontal",
+            "frames_dir": "c:/Projects/Zidane/four_poses/stream_huvf_longrec_h",
+            "annotation_file": "c:/Projects/Zidane/annotation/stream_huvf_longrec_h/annotations.xml",
+            "box_annotation_file": "c:/Projects/Zidane/box_annotation/stream_huvf_longrec_h/annotations.xml",
+            "frame_pattern": "frame_{:06d}.png",
+            "frame_start": 0
+        },
+        {
+            "stream_id": "stream_huvf_longrec_v",
+            "type": "huvf",
+            "location": "longrec",
+            "orientation": "vertical",
+            "frames_dir": "c:/Projects/Zidane/four_poses/stream_huvf_longrec_v",
+            "annotation_file": "c:/Projects/Zidane/annotation/stream_huvf_longrec_v/annotations.xml",
+            "box_annotation_file": "c:/Projects/Zidane/box_annotation/stream_huvf_longrec_v/annotations.xml",
+            "frame_pattern": "frame_{:06d}.png",
+            "frame_start": 0
+        }
+    ],
+    "metadata": {
+        "frame_format": "PNG",
+        "annotation_format": "XML",
+        "frame_naming_pattern": "frame_{frame_number:06d}.png",
+        "notes": "All streams have consistent annotation coverage across annotation and box_annotation directories"
+    }
+}

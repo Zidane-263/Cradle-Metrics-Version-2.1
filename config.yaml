@@ -1,0 +1,75 @@
+# Automatic Pipeline Configuration
+# Edit this file to test different images
+
+# ============================================================================
+# INPUT SETTINGS
+# ============================================================================
+
+# Path to test image (change this to your image path)
+TEST_IMAGE: "four_poses/stream_hdvb_aroundabd_h/frame_000001.png"
+
+# Output directory for results
+OUTPUT_DIR: "automatic_results"
+
+# ============================================================================
+# MODEL SETTINGS
+# ============================================================================
+
+# Path to trained YOLO model (will be available after training completes)
+YOLO_MODEL: "runs/detect/fetal_detection/weights/best.pt"
+
+# Path to SAM model
+SAM_MODEL: "sam_vit_b_01ec64.pth"
+
+# ============================================================================
+# DETECTION SETTINGS
+# ============================================================================
+
+# Confidence threshold for YOLO detections (0.0 - 1.0)
+# Lower = more detections (may include false positives)
+# Higher = fewer detections (more confident)
+CONFIDENCE_THRESHOLD: 0.5
+
+# ============================================================================
+# CALIBRATION SETTINGS
+# ============================================================================
+
+# Pixel-to-mm calibration factor
+# Example: 2.5 means 2.5 pixels = 1mm
+# Set to None to use pixels instead of mm
+PIXEL_TO_MM: 2.5
+
+# ============================================================================
+# CLINICAL ASSESSMENT SETTINGS (INTERGROWTH-21st)
+# ============================================================================
+
+# Enable INTERGROWTH-21st clinical assessment
+ENABLE_CLINICAL_ASSESSMENT: true
+
+# Known gestational age in weeks (optional)
+# Set to null to estimate from measurements
+GESTATIONAL_AGE_WEEKS: null
+
+# Show percentiles in output
+SHOW_PERCENTILES: true
+
+# Show growth classification (SGA/AGA/LGA)
+SHOW_GROWTH_CLASSIFICATION: true
+
+# Show estimated gestational age
+SHOW_GA_ESTIMATE: true
+
+# ============================================================================
+# QUICK TEST EXAMPLES
+# ============================================================================
+
+# Uncomment one of these to test different images:
+
+# Example 1: Head-down view
+# TEST_IMAGE: "four_poses/stream_hdvb_aroundabd_h/frame_0001.png"
+
+# Example 2: Head-up view
+# TEST_IMAGE: "four_poses/stream_huvb_aroundabd_h/frame_0001.png"
+
+# Example 3: Custom uploaded image
+# TEST_IMAGE: "path/to/your/custom/image.png"

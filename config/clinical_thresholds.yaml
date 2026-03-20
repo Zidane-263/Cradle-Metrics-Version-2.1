@@ -1,0 +1,127 @@
+# Clinical Thresholds Configuration
+# INTERGROWTH-21st and WHO Standards
+
+# Percentile thresholds for risk classification
+percentiles:
+  normal:
+    min: 10  # 10th percentile
+    max: 90  # 90th percentile
+  borderline_low:
+    min: 5   # 5th percentile
+    max: 10  # 10th percentile
+  borderline_high:
+    min: 90  # 90th percentile
+    max: 95  # 95th percentile
+  high_risk_low:
+    max: 5   # Below 5th percentile
+  high_risk_high:
+    min: 95  # Above 95th percentile
+
+# Measurement-specific thresholds (in mm)
+measurements:
+  HC:  # Head Circumference
+    min_normal: 150
+    max_normal: 400
+    critical_low: 140
+    critical_high: 420
+  
+  AC:  # Abdominal Circumference
+    min_normal: 150
+    max_normal: 400
+    critical_low: 140
+    critical_high: 420
+  
+  BPD:  # Biparietal Diameter
+    min_normal: 40
+    max_normal: 110
+    critical_low: 35
+    critical_high: 120
+  
+  FL:  # Femur Length
+    min_normal: 30
+    max_normal: 90
+    critical_low: 25
+    critical_high: 100
+
+# Gestational Age thresholds (in weeks)
+gestational_age:
+  min_viable: 24
+  max_normal: 42
+  preterm: 37
+  post_term: 42
+
+# Growth patterns
+growth_patterns:
+  IUGR:  # Intrauterine Growth Restriction
+    description: "Fetal growth below 10th percentile"
+    criteria:
+      - "AC < 10th percentile"
+      - "HC/AC ratio > 1.2"
+  
+  macrosomia:
+    description: "Excessive fetal growth"
+    criteria:
+      - "AC > 90th percentile"
+      - "Estimated fetal weight > 4000g"
+  
+  microcephaly:
+    description: "Small head size"
+    criteria:
+      - "HC < 5th percentile"
+      - "HC/AC ratio < 0.9"
+  
+  AGA:  # Appropriate for Gestational Age
+    description: "Normal growth pattern"
+    criteria:
+      - "All measurements between 10th-90th percentile"
+
+# Risk levels and colors
+risk_levels:
+  normal:
+    color: "#10b981"  # Green
+    icon: "✓"
+    priority: 0
+  
+  borderline:
+    color: "#f59e0b"  # Yellow/Orange
+    icon: "⚠"
+    priority: 1
+  
+  high_risk:
+    color: "#ef4444"  # Red
+    icon: "⚠"
+    priority: 2
+  
+  critical:
+    color: "#dc2626"  # Dark Red
+    icon: "🚨"
+    priority: 3
+
+# Clinical recommendations
+recommendations:
+  IUGR:
+    - "Repeat ultrasound in 2-3 weeks"
+    - "Monitor fetal movement"
+    - "Consider Doppler studies"
+    - "Consult maternal-fetal medicine specialist"
+  
+  macrosomia:
+    - "Screen for gestational diabetes"
+    - "Monitor maternal glucose levels"
+    - "Consider delivery planning"
+    - "Assess for shoulder dystocia risk"
+  
+  microcephaly:
+    - "Detailed anatomical survey"
+    - "Consider genetic counseling"
+    - "Screen for TORCH infections"
+    - "Refer to pediatric neurology"
+  
+  borderline_measurements:
+    - "Repeat measurement in 1-2 weeks"
+    - "Ensure accurate gestational age dating"
+    - "Monitor growth trajectory"
+  
+  normal:
+    - "Continue routine prenatal care"
+    - "Next ultrasound as per protocol"

@@ -1,0 +1,27 @@
+# Batch Processing Configuration
+
+# Input directory containing ultrasound images
+INPUT_DIR: "four_poses/stream_hdvb_longrec_v"
+
+# Output directory for batch results
+OUTPUT_DIR: "batch_results"
+
+# Calibration (pixels per mm)
+PIXEL_TO_MM: 2.5
+
+# Known gestational age (optional, set to null to estimate)
+GESTATIONAL_AGE_WEEKS: null
+
+# Patient ID for this batch (optional, defaults to directory name)
+PATIENT_ID: Patient_Zizu_01
+
+# Enable clinical assessment
+ENABLE_CLINICAL_ASSESSMENT: true
+
+# Image file extensions to process
+IMAGE_EXTENSIONS:
+  - .png
+  - .jpg
+  - .jpeg
+  - .bmp
+  - .tif

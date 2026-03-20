@@ -1,0 +1,87 @@
+# ============================================================================
+# Cradle Metrics - Fetal Ultrasound Segmentation & Biometric Extraction
+# Python Dependencies
+# ============================================================================
+
+# Deep Learning Framework
+torch>=2.0.0
+torchvision>=0.15.0
+torchaudio>=2.0.0
+
+# Segmentation Models
+segmentation-models-pytorch>=0.3.3
+
+# Computer Vision
+opencv-python>=4.8.0
+albumentations>=1.3.1
+
+# Image Processing
+scikit-image>=0.21.0
+scikit-learn>=1.3.0
+scipy>=1.11.0
+
+# Data Handling
+h5py>=3.9.0
+numpy>=1.24.0
+
+# Segment Anything Model (SAM)
+git+https://github.com/facebookresearch/segment-anything.git
+
+# Progress Bars
+tqdm>=4.66.0
+
+# Web UI
+flask>=2.3.0
+
+# ============================================================================
+# Installation Instructions
+# ============================================================================
+#
+# 1. Create and activate conda environment:
+#    conda create -n torch python=3.9
+#    conda activate torch
+#
+# 2. Install PyTorch with CUDA support (adjust CUDA version as needed):
+#    conda install pytorch torchvision torchaudio pytorch-cuda=11.8 -c pytorch -c nvidia
+#
+# 3. Install remaining dependencies:
+#    pip install -r requirements.txt
+#
+# 4. Download SAM model checkpoint:
+#    The SAM ViT-B model checkpoint (sam_vit_b_01ec64.pth) should be placed
+#    in the project root directory.
+#
+#    Download from:
+#    https://dl.fbaipublicfiles.com/segment_anything/sam_vit_b_01ec64.pth
+#
+#    Or use wget/curl:
+#    wget https://dl.fbaipublicfiles.com/segment_anything/sam_vit_b_01ec64.pth
+#
+#    Or PowerShell (Windows):
+#    Invoke-WebRequest -Uri "https://dl.fbaipublicfiles.com/segment_anything/sam_vit_b_01ec64.pth" -OutFile "sam_vit_b_01ec64.pth"
+#
+# ============================================================================
+# Alternative SAM Models (Optional)
+# ============================================================================
+#
+# SAM ViT-L (Large) - Better accuracy, more memory:
+# https://dl.fbaipublicfiles.com/segment_anything/sam_vit_l_0b3195.pth
+#
+# SAM ViT-H (Huge) - Best accuracy, highest memory:
+# https://dl.fbaipublicfiles.com/segment_anything/sam_vit_h_4b8939.pth
+#
+# ============================================================================
+# Troubleshooting
+# ============================================================================
+#
+# If you encounter OpenMP errors on Windows:
+# - Already handled in code with: os.environ["KMP_DUPLICATE_LIB_OK"] = "TRUE"
+#
+# If CUDA out of memory:
+# - Reduce batch_size in config.py
+# - Use mixed precision training (already enabled)
+#
+# If DataLoader crashes on Windows:
+# - Set num_workers=0 in config.py (already configured)
+#
+# ============================================================================
